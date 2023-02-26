@@ -1,6 +1,10 @@
 .cell {
     width: 100px;
     height: 100px;
-    background-color: aqua;
+    background-color: deepskyblue;
     cursor: pointer;
+}
+
+.cell:hover {
+    background-color: slateblue;
 }
