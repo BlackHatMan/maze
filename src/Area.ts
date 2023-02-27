@@ -1,15 +1,15 @@
 export class Area {
   matrix: number[][][];
   path: string[];
-  randomStartY: number;
-  constructor(size: number, countSteps: number = 10) {
-    this.randomStartY = Math.floor(Math.random() * size);
-    this.matrix = this.generateMatrix(size);
-    this.path = this.generatePath(countSteps, this.matrix.length - 1, this.randomStartY);
-  }
+  private randomY: number;
   coordinates: number[][] = [];
+  constructor(size: number, countSteps: number = 10) {
+    this.randomY = Math.floor(Math.random() * size);
+    this.matrix = this.generateMatrix(size);
+    this.path = this.generatePath(countSteps, this.matrix.length - 1, this.randomY);
+  }
 
-  generatePath(steps: number, x: number, y: number): string[] {
+  private generatePath(steps: number, x: number, y: number): string[] {
     if (steps === 0) return [];
 
     const data = this.searchNeighbors(steps, x, y);
@@ -26,7 +26,7 @@ export class Area {
     return [direction, ...nextDirection];
   }
 
-  generateMatrix(size: number) {
+  private generateMatrix(size: number) {
     const matrix: number[][][] = [];
 
     for (let i = 0; i < size; i++) {
@@ -39,7 +39,7 @@ export class Area {
     return matrix;
   }
 
-  searchNeighbors = (step: number, x: number, y: number) => {
+  private searchNeighbors = (step: number, x: number, y: number) => {
     let up;
     let down;
     let right;
@@ -78,6 +78,12 @@ export class Area {
 
     return neighbors;
   };
+  get getFinish() {
+    return this.coordinates.at(-1);
+  }
+  get getStart() {
+    return [this.matrix.length - 1, this.randomY];
+  }
 }
 
 type neighbors = {

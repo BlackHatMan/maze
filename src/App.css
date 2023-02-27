@@ -2,6 +2,7 @@
   text-align: center;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -15,4 +16,15 @@
 .row {
   display: flex;
   gap: 10px;
+}
+
+.path {
+  margin-top: 30px;
+  width: 320px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+.path > span {
+  padding: 0.3rem;
+  border: 1px gray solid;
 }

@@ -18,6 +18,11 @@ function App() {
           );
         })}
       </div>
+      <div className="path">
+        {area.path.map((el, i) => {
+          return <span key={el + i}>{el}</span>;
+        })}
+      </div>
     </div>
   );
 }
