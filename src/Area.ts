@@ -1,6 +1,6 @@
 export class Area {
   matrix: number[][][];
-  path: string[];
+  path: direction[];
   private randomY: number;
   coordinates: number[][] = [];
   constructor(size: number, countSteps: number = 10) {
@@ -9,7 +9,7 @@ export class Area {
     this.path = this.generatePath(countSteps, this.matrix.length - 1, this.randomY);
   }
 
-  private generatePath(steps: number, x: number, y: number): string[] {
+  private generatePath(steps: number, x: number, y: number): direction[] {
     if (steps === 0) return [];
 
     const data = this.searchNeighbors(steps, x, y);
@@ -39,7 +39,7 @@ export class Area {
     return matrix;
   }
 
-  private searchNeighbors = (step: number, x: number, y: number) => {
+  private searchNeighbors = (step: number, x: number, y: number): neighbors[] => {
     let up;
     let down;
     let right;
@@ -87,6 +87,7 @@ export class Area {
 }
 
 type neighbors = {
-  direction: 'up' | 'down' | 'left' | 'right';
+  direction: direction;
   coordinate: number[];
 };
+export type direction = 'up' | 'down' | 'left' | 'right';

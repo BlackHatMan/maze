@@ -1,8 +1,12 @@
 import './App.css';
 import { Cell } from './cell/Cell';
-import { Area } from './Area';
+import { Area, direction } from './Area';
 import { useState } from 'react';
 import { Modal } from './modal/Modal';
+import { FaRegHandPointUp } from 'react-icons/fa';
+import { FaRegHandPointDown } from 'react-icons/fa';
+import { FaRegHandPointLeft } from 'react-icons/fa';
+import { FaRegHandPointRight } from 'react-icons/fa';
 
 function App() {
   const area = new Area(3);
@@ -10,6 +14,18 @@ function App() {
   console.log('App.tsx:26', area);
   const onClose = () => {
     setOpen((prev) => !prev);
+  };
+  const renderImage = (direction: direction) => {
+    switch (direction) {
+      case 'up':
+        return <FaRegHandPointUp />;
+      case 'down':
+        return <FaRegHandPointDown />;
+      case 'left':
+        return <FaRegHandPointLeft />;
+      case 'right':
+        return <FaRegHandPointRight />;
+    }
   };
   return (
     <div className="App">
@@ -26,11 +42,11 @@ function App() {
       </div>
       <div className="path">
         {area.path.map((el, i) => {
-          return <span key={el + i}>{el}</span>;
+          return <span key={el + i}>{renderImage(el)}</span>;
         })}
       </div>
       <Modal isOpen={isOpen} onClose={onClose}>
-        <p>lox</p>
+        <p>Goof</p>
       </Modal>
     </div>
   );
