@@ -1,0 +1,29 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgb(230, 226, 226, 0.5);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: all;
+}
+
+.modal {
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    animation: 0.3s ease-in-out appear;
+}
+
+@keyframes appear {
+    from {
+        transform: translateY(-400px);
+    }
+    to {
+        transform: translateY(40px);
+    }
+}

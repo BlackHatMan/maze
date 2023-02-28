@@ -1,13 +1,19 @@
 import './App.css';
 import { Cell } from './cell/Cell';
 import { Area } from './Area';
+import { useState } from 'react';
+import { Modal } from './modal/Modal';
 
 function App() {
   const area = new Area(3);
-  console.log('file: App.tsx:26 ~ myPath:', area);
+  const [isOpen, setOpen] = useState(false);
+  console.log('App.tsx:26', area);
+  const onClose = () => {
+    setOpen((prev) => !prev);
+  };
   return (
     <div className="App">
-      <div className="container">
+      <div className="container" onClick={() => setOpen((prev) => !prev)}>
         {area.matrix.map((row, indexRow) => {
           return (
             <div className="row" key={indexRow}>
@@ -23,6 +29,9 @@ function App() {
           return <span key={el + i}>{el}</span>;
         })}
       </div>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <p>lox</p>
+      </Modal>
     </div>
   );
 }
