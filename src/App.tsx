@@ -1,12 +1,14 @@
-import './App.css';
-import { Cell } from './cell/Cell';
-import { Area, direction } from './Area';
 import { useState } from 'react';
+import { Area, direction } from './Area';
 import { Modal } from './modal/Modal';
+import { Cell } from './cell/Cell';
+
 import { FaRegHandPointUp } from 'react-icons/fa';
 import { FaRegHandPointDown } from 'react-icons/fa';
 import { FaRegHandPointLeft } from 'react-icons/fa';
 import { FaRegHandPointRight } from 'react-icons/fa';
+
+import './App.css';
 
 function App() {
   const area = new Area(3);

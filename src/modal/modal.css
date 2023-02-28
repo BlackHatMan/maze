@@ -24,6 +24,6 @@
         transform: translateY(-400px);
     }
     to {
-        transform: translateY(40px);
+        transform: translateY(0);
     }
 }

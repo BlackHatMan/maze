@@ -1,6 +1,5 @@
-import { ReactElement } from 'react';
+import { ReactElement, FC } from 'react';
 import { createPortal } from 'react-dom';
-import { FC } from 'react';
 import './modal.css';
 
 export const Modal: FC<{ children: ReactElement; isOpen: boolean; onClose: () => void }> = ({
