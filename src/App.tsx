@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import { Area, direction } from './Area';
 import { Modal } from './modal/Modal';
 import { Cell } from './cell/Cell';
@@ -14,9 +14,11 @@ function App() {
   const area = new Area(3);
   const [isOpen, setOpen] = useState(false);
   console.log('App.tsx:26', area);
-  const onClose = () => {
+
+  const handlerModalClose = () => {
     setOpen((prev) => !prev);
   };
+
   const renderImage = (direction: direction) => {
     switch (direction) {
       case 'up':
@@ -29,14 +31,25 @@ function App() {
         return <FaRegHandPointRight />;
     }
   };
+  const handler = (value: number[]): void => {
+    setOpen((prev) => !prev);
+  };
   return (
     <div className="App">
-      <div className="container" onClick={() => setOpen((prev) => !prev)}>
-        {area.matrix.map((row, indexRow) => {
+      <div className="container">
+        {area.matrix.map((row, idxRow) => {
           return (
-            <div className="row" key={indexRow}>
-              {row.map((cell, indexCell) => {
-                return <Cell key={indexCell + indexRow}>{cell}</Cell>;
+            <div className="row" key={idxRow}>
+              {row.map((valueCell, idxCell) => {
+                return (
+                  <Cell
+                    key={idxCell + idxRow}
+                    start={area.getStart}
+                    finish={area.getFinish}
+                    value={valueCell}
+                    handlerCheck={handler}
+                  />
+                );
               })}
             </div>
           );
@@ -47,7 +60,7 @@ function App() {
           return <span key={el + i}>{renderImage(el)}</span>;
         })}
       </div>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={handlerModalClose}>
         <p>Goof</p>
       </Modal>
     </div>

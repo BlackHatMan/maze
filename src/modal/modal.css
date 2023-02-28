@@ -15,7 +15,8 @@
 .modal {
     width: 400px;
     height: 400px;
-    background-color: white;
+    border-radius: 15px;
+    background-color: rgb(230, 226, 226, 0.8);
     animation: 0.3s ease-in-out appear;
 }
 

@@ -79,7 +79,7 @@ export class Area {
     return neighbors;
   };
   get getFinish() {
-    return this.coordinates.at(-1);
+    return this.coordinates.at(-1) as number[];
   }
   get getStart() {
     return [this.matrix.length - 1, this.randomY];
