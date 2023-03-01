@@ -39,7 +39,7 @@ export class Area {
     return matrix;
   }
 
-  private searchNeighbors = (step: number, x: number, y: number): neighbors[] => {
+  private searchNeighbors(step: number, x: number, y: number): neighbors[] {
     let up;
     let down;
     let right;
@@ -77,7 +77,7 @@ export class Area {
     }
 
     return neighbors;
-  };
+  }
   get getFinish() {
     return this.coordinates.at(-1) as number[];
   }
@@ -90,4 +90,7 @@ type neighbors = {
   direction: direction;
   coordinate: number[];
 };
+
 export type direction = 'up' | 'down' | 'left' | 'right';
+
+export type IArea = InstanceType<typeof Area>;
