@@ -9,17 +9,6 @@
     gap: 10px;
 }
 
-.path {
-    margin-top: 30px;
-    width: 320px;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-}
-.path > span {
-    padding: 0.3rem;
-    border: 1px gray solid;
-}
-
 .cell {
     width: 100px;
     height: 100px;

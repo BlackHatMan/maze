@@ -17,12 +17,12 @@
     height: 400px;
     border-radius: 15px;
     background-color: rgb(230, 226, 226, 0.8);
-    animation: 0.3s ease-in-out appear;
+    animation: 0.7s ease-in-out appear;
 }
 
 @keyframes appear {
     from {
-        transform: translateY(-400px);
+        transform: translateY(-800px);
     }
     to {
         transform: translateY(0);

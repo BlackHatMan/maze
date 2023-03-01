@@ -1,0 +1,21 @@
+.App {
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.path {
+    margin-top: 30px;
+    width: 320px;
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(5, 1fr);
+}
+.path-item {
+    border-radius: 3px;
+    padding: 0.3rem;
+    background-color: aliceblue;
+}
