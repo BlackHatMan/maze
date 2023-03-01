@@ -15,9 +15,9 @@ import './App.css';
 
 function App() {
   const dispatch = useAppDispatch();
-  const status = useAppSelector((game) => game.status);
+  const { status, gameScore } = useAppSelector((game) => game);
 
-  const [isOpen, setOpen] = useState(false);
+  const [isCheck, setIsCheck] = useState(false);
   const [isNewGame, setNewGame] = useState(0);
 
   const area = useMemo(() => {
@@ -26,13 +26,13 @@ function App() {
 
   const onCheck = (value: number[]): void => {
     const status = value.toString() === area.getFinish.toString();
-    setOpen((prev) => !prev);
+    setIsCheck((prev) => !prev);
     dispatch(statusGame(status));
   };
 
   const onNewGame = () => {
     setNewGame((prev) => prev + 1);
-    setOpen((prev) => !prev);
+    setIsCheck((prev) => !prev);
   };
 
   const transitions = useCallback(
@@ -40,14 +40,14 @@ function App() {
       keys: Math.random() * 1000,
       from: { opacity: 0, scale: 0 },
       enter: { opacity: 1, scale: 1 },
-      delay: 300,
-      trail: 100,
+      delay: 200,
+      trail: 50,
     }),
     [isNewGame]
   );
 
   const handlerModalClose = () => {
-    setOpen((prev) => !prev);
+    setIsCheck((prev) => !prev);
   };
 
   const renderImage = (direction: direction) => {
@@ -64,26 +64,38 @@ function App() {
   };
   return (
     <div className="App">
-      <h1 className="title">ЛАБИРИНТ</h1>
-      <GameField area={area} onCheck={onCheck} checked={isOpen} />
+      <div className="container">
+        <h1 className="title">ЛАБИРИНТ</h1>
+        <GameField area={area} onCheck={onCheck} checked={isCheck} />
 
-      <div className="path">
-        {transitions((style, el) => {
-          return (
-            <animated.span className="path-item" style={style}>
-              {renderImage(el)}
-            </animated.span>
-          );
-        })}
-      </div>
-      <Modal isOpen={isOpen} onClose={handlerModalClose}>
-        <div className="modal-content" style={{ backgroundColor: status ? '#32ed1c33' : '#fd040433' }}>
-          {status ? <p className="modal-title">ПОЗДРАВЛЯЕМ</p> : <p className="modal-title">Вы проиграли</p>}
-          <button className="btn-newgame" onClick={onNewGame}>
-            Начать новую
-          </button>
+        <div className="path">
+          {transitions((style, el) => {
+            return (
+              <animated.span className="path-item" style={style}>
+                {renderImage(el)}
+              </animated.span>
+            );
+          })}
         </div>
-      </Modal>
+        <Modal isOpen={isCheck} onClose={handlerModalClose}>
+          <div className="modal-content" style={{ backgroundColor: status ? '#32ed1c33' : '#fd040433' }}>
+            {status ? <p className="modal-title">ПОЗДРАВЛЯЕМ</p> : <p className="modal-title">Вы проиграли</p>}
+            <button className="btn-newgame" onClick={onNewGame}>
+              Начать новую
+            </button>
+          </div>
+        </Modal>
+        <div className="score">
+          <ul>
+            <li>Человек:</li>
+            <li>{gameScore.win}</li>
+          </ul>
+          <ul>
+            <li>Гениальная машина:</li>
+            <li>{gameScore.lose}</li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }

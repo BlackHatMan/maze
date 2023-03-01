@@ -14,6 +14,8 @@ export const gameSlice = createSlice({
   reducers: {
     statusGame: (state, { payload }: { payload: boolean }) => {
       state.status = payload;
+      state.gameScore.win = payload ? state.gameScore.win + 1 : state.gameScore.win;
+      state.gameScore.lose = payload ? state.gameScore.lose : state.gameScore.lose + 1;
     },
   },
 });
