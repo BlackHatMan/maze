@@ -57,7 +57,7 @@ export class Area {
         coordinate: up,
       });
     }
-    if (down && step > 3) {
+    if (down && step > 5) {
       neighbors.push({
         direction: 'down',
         coordinate: down,
