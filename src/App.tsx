@@ -1,11 +1,10 @@
 import { useCallback, useMemo, useState } from 'react';
+import { useTransition, animated } from '@react-spring/web';
 import { useAppSelector, useAppDispatch } from './store/hooks';
 import { GameField } from './components/GameField';
 import { Area, direction } from './Area';
 import { Modal } from './components/Modal';
 import { statusGame } from './store/slice';
-
-import { useTransition, animated } from '@react-spring/web';
 
 import { FaRegHandPointUp } from 'react-icons/fa';
 import { FaRegHandPointDown } from 'react-icons/fa';
@@ -71,7 +70,7 @@ function App() {
       <div className="path">
         {transitions((style, el) => {
           return (
-            <animated.span style={style} className="path-item">
+            <animated.span className="path-item" style={style}>
               {renderImage(el)}
             </animated.span>
           );
@@ -80,7 +79,7 @@ function App() {
       <Modal isOpen={isOpen} onClose={handlerModalClose}>
         <div className="modal-content" style={{ backgroundColor: status ? '#32ed1c33' : '#fd040433' }}>
           {status ? <p className="modal-title">ПОЗДРАВЛЯЕМ</p> : <p className="modal-title">Вы проиграли</p>}
-          <button onClick={onNewGame} className="btn-newgame">
+          <button className="btn-newgame" onClick={onNewGame}>
             Начать новую
           </button>
         </div>
