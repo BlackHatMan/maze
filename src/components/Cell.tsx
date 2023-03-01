@@ -1,8 +1,6 @@
 import { FaFlagCheckered } from 'react-icons/fa';
 import { FC } from 'react';
 
-import './cell.css';
-
 export const Cell: FC<{
   value: number[];
   handlerCheck: (value: number[]) => void;
