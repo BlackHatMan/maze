@@ -5,7 +5,7 @@ import { Area, direction } from './Area';
 import { Modal } from './components/Modal';
 import { statusGame } from './store/slice';
 
-import { useTransition, animated, useSprings } from '@react-spring/web';
+import { useTransition, animated } from '@react-spring/web';
 
 import { FaRegHandPointUp } from 'react-icons/fa';
 import { FaRegHandPointDown } from 'react-icons/fa';
@@ -25,22 +25,6 @@ function App() {
     return new Area(3);
   }, [isNewGame]);
 
-  const handlerModalClose = () => {
-    setOpen((prev) => !prev);
-  };
-
-  const renderImage = (direction: direction) => {
-    switch (direction) {
-      case 'up':
-        return <FaRegHandPointUp color="red" />;
-      case 'down':
-        return <FaRegHandPointDown color="red" />;
-      case 'left':
-        return <FaRegHandPointLeft color="red" />;
-      case 'right':
-        return <FaRegHandPointRight color="red" />;
-    }
-  };
   const onCheck = (value: number[]): void => {
     const status = value.toString() === area.getFinish.toString();
     setOpen((prev) => !prev);
@@ -57,15 +41,31 @@ function App() {
       keys: Math.random() * 1000,
       from: { opacity: 0, scale: 0 },
       enter: { opacity: 1, scale: 1 },
-      delay: 400,
+      delay: 300,
       trail: 100,
     }),
     [isNewGame]
   );
 
+  const handlerModalClose = () => {
+    setOpen((prev) => !prev);
+  };
+
+  const renderImage = (direction: direction) => {
+    switch (direction) {
+      case 'up':
+        return <FaRegHandPointUp color="red" />;
+      case 'down':
+        return <FaRegHandPointDown color="red" />;
+      case 'left':
+        return <FaRegHandPointLeft color="red" />;
+      case 'right':
+        return <FaRegHandPointRight color="red" />;
+    }
+  };
   return (
     <div className="App">
-      <h1>ЛАБИРИНТ</h1>
+      <h1 className="title">ЛАБИРИНТ</h1>
       <GameField area={area} onCheck={onCheck} checked={isOpen} />
 
       <div className="path">
@@ -78,8 +78,12 @@ function App() {
         })}
       </div>
       <Modal isOpen={isOpen} onClose={handlerModalClose}>
-        {status ? <p>Winner</p> : <p>Goof</p>}
-        <button onClick={onNewGame}>start new game</button>
+        <div className="modal-content" style={{ backgroundColor: status ? '#32ed1c33' : '#fd040433' }}>
+          {status ? <p className="modal-title">ПОЗДРАВЛЯЕМ</p> : <p className="modal-title">Вы проиграли</p>}
+          <button onClick={onNewGame} className="btn-newgame">
+            Начать новую
+          </button>
+        </div>
       </Modal>
     </div>
   );
